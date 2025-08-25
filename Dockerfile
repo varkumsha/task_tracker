@@ -5,21 +5,21 @@ WORKDIR /app
 # Copy project files
 COPY . .
 
-# Ensure mvnw is executable
-RUN chmod +x mvnw
+# Fix permissions for mvnw
+RUN chmod +x ./mvnw
 
-# Package the application (skip tests for faster builds)
+# Build the app
 RUN ./mvnw clean package -DskipTests
 
 # Stage 2: Run the application
 FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
-# Copy the built jar from the previous stage
+# Copy the jar from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose port 8080 (Spring Boot default)
+# Expose Spring Boot default port
 EXPOSE 8080
 
-# Start the app
+# Run the app
 ENTRYPOINT ["java", "-jar", "app.jar"]
