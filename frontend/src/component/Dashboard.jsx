@@ -10,7 +10,7 @@ const Dashboard = () => {
         const token = localStorage.getItem("token");
 
         api
-            .post("http://localhost:8080/user/v1/users", {
+            .post("https://task-tracker-1lxu.onrender.com/user/v1/users", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
