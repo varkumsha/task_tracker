@@ -6,11 +6,11 @@ publish = "/build"
 # Redirect for User APIs
 [[redirects]]
 from = "/user/v1/*"
-to = "https://saktrack-backend.onrender.com/user/v1/:splat"
+to = "https://task-tracker-1lxu.onrender.com/user/v1/:splat"
 status = 200
 
 # Redirect for Auth APIs
 [[redirects]]
 from = "/auth/v1/*"
-to = "https://saktrack-backend.onrender.com/auth/v1/:splat"
+to = "https://task-tracker-1lxu.onrender.com/auth/v1/:splat"
 status = 200
