@@ -11,6 +11,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
+import java.util.List;
+
 @Configuration
 public class SecurityConfig {
 
@@ -27,7 +29,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(request ->
                 {
                     var corsConfig = new CorsConfiguration();
-                    corsConfig.addAllowedOrigin("http://localhost:3000");
+                    corsConfig.addAllowedOrigin("https://aquamarine-pixie-bf9c98.netlify.app");
                     corsConfig.addAllowedHeader("*");
                     corsConfig.addAllowedMethod("*");
                     corsConfig.setAllowCredentials(true);
