@@ -1,0 +1,16 @@
+[build]
+base = "frontend"
+command = "npm run build"
+publish = "frontend/build"
+
+# Redirect for User APIs
+[[redirects]]
+from = "/user/v1/*"
+to = "https://saktrack-backend.onrender.com/user/v1/:splat"
+status = 200
+
+# Redirect for Auth APIs
+[[redirects]]
+from = "/auth/v1/*"
+to = "https://saktrack-backend.onrender.com/auth/v1/:splat"
+status = 200
