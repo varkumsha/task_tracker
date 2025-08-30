@@ -1,28 +1,39 @@
 import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import API_BASE_URL from "../config";
 
-const Login = () => {
-    const [userName, setUserName] = useState("");
+const ResetPassword = () => {
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [message, setMessage] = useState("");
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
+    const navigate = useNavigate();
+
+    // Extract token from URL
+    const query = new URLSearchParams(useLocation().search);
+    const token = query.get("token");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post(
-                `${API_BASE_URL}/auth/v1/login`,
-                { userName, password }
-            );
+        setMessage("");
+        setError("");
 
-            localStorage.setItem("token", response.data.token);
-            setSuccess("Logged-in successful!");
-            setTimeout(() => {
-                window.location.href = "/dashboard";
-            }, 2000)
+        if (password !== confirmPassword) {
+            setError("Passwords do not match!");
+            return;
+        }
+
+        try {
+            const response = await axios.post(`${API_BASE_URL}/auth/v1/reset-password`, {
+                token,
+                newPassword: password,
+            });
+
+            setMessage(response.data.message || "Password reset successful!");
+            setTimeout(() => navigate("/login"), 2000); // redirect to login after 2 sec
         } catch (err) {
-            setError("Invalid credentials. Please try again.");
+            setError("Unable to reset password. The link may have expired.");
         }
     };
 
@@ -47,7 +58,6 @@ const Login = () => {
                     borderRadius: "16px",
                     background: "white",
                     boxShadow: "0px 8px 20px rgba(0,0,0,0.15)",
-                    animation: "fadeIn 0.8s ease-in-out",
                 }}
             >
                 <h2
@@ -57,28 +67,12 @@ const Login = () => {
                         color: "#0077b6",
                     }}
                 >
-                    Welcome Back 👋
+                    Reset Password 🔒
                 </h2>
 
                 <input
-                    type="text"
-                    placeholder="Email or Mobile"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    required
-                    style={{
-                        padding: "12px",
-                        borderRadius: "8px",
-                        border: "1px solid #ccc",
-                        marginBottom: "12px",
-                        outline: "none",
-                        fontSize: "15px",
-                    }}
-                />
-
-                <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="New Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -87,7 +81,21 @@ const Login = () => {
                         borderRadius: "8px",
                         border: "1px solid #ccc",
                         marginBottom: "12px",
-                        outline: "none",
+                        fontSize: "15px",
+                    }}
+                />
+
+                <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                    style={{
+                        padding: "12px",
+                        borderRadius: "8px",
+                        border: "1px solid #ccc",
+                        marginBottom: "12px",
                         fontSize: "15px",
                     }}
                 />
@@ -105,31 +113,23 @@ const Login = () => {
                         cursor: "pointer",
                         transition: "0.3s",
                     }}
-                    onMouseOver={(e) => (e.target.style.opacity = 0.9)}
-                    onMouseOut={(e) => (e.target.style.opacity = 1)}
                 >
-                    Login
+                    Change Password
                 </button>
 
+                {message && <p style={{ color: "green", textAlign: "center" }}>{message}</p>}
                 {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-                {success && <p style={{ color: "green", textAlign: "center" }}>{success}</p>}
 
                 <div
                     style={{
                         display: "flex",
-                        justifyContent: "space-between",
+                        justifyContent: "center",
                         marginTop: "15px",
                         fontSize: "14px",
                     }}
                 >
-                    <a href="/register" style={{ color: "#0077b6", textDecoration: "none" }}>
-                        Register
-                    </a>
-                    <a
-                        href="/forgot-password"
-                        style={{ color: "#0077b6", textDecoration: "none" }}
-                    >
-                        Forgot Password?
+                    <a href="/login" style={{ color: "#0077b6", textDecoration: "none" }}>
+                        Back to Login
                     </a>
                 </div>
             </form>
@@ -137,4 +137,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default ResetPassword;

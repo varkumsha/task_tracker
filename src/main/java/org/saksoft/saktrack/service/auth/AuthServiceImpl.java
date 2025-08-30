@@ -5,15 +5,19 @@ import org.saksoft.saktrack.dto.response.auth.LoginResponse;
 import org.saksoft.saktrack.model.User;
 import org.saksoft.saktrack.repository.UserRepository;
 import org.saksoft.saktrack.service.jwt.JwtUtils;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+
+import java.util.logging.Logger;
 
 @Component
 public class AuthServiceImpl implements AuthService {
 
     private final JwtUtils jwtUtils;
     private final UserRepository userRepository;
+    private final Logger LOGGER = Logger.getLogger(AuthServiceImpl.class.getName());
 
     public AuthServiceImpl(JwtUtils jwtUtils, UserRepository userRepository) {
         this.jwtUtils = jwtUtils;
@@ -49,6 +53,7 @@ public class AuthServiceImpl implements AuthService {
         loginResponse.setToken(token);
         loginResponse.setStatus(Boolean.TRUE.toString());
         loginResponse.setMessage("Login Successful");
+
         return ResponseEntity.status(HttpStatus.OK).body(loginResponse);
     }
 }

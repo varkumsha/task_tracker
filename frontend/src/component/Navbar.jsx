@@ -11,7 +11,7 @@ function Navbar() {
 
     return (
         <nav style={styles.nav}>
-            <h3 style={styles.logo}>SakTrack</h3>
+            <h3 style={styles.logo}>FlowTracker</h3>
             <ul style={styles.menu}>
                 <li><Link to="/dashboard" style={styles.link}>Dashboard</Link></li>
                 <li><button onClick={handleLogout} style={styles.logout}>Logout</button></li>
@@ -25,7 +25,7 @@ const styles = {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        background: "#333",
+        background:  "linear-gradient(135deg, rgb(36,72,129) 0%, rgb(92,165,198) 100%)",
         color: "white",
         padding: "10px 20px"
     },

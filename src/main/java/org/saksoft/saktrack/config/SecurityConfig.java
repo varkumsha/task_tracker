@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(request ->
                 {
                     var corsConfig = new CorsConfiguration();
-                    corsConfig.addAllowedOrigin("https://aquamarine-pixie-bf9c98.netlify.app");
+                    corsConfig.addAllowedOrigin("http://localhost:3000");
                     corsConfig.addAllowedHeader("*");
                     corsConfig.addAllowedMethod("*");
                     corsConfig.setAllowCredentials(true);
@@ -41,7 +41,6 @@ public class SecurityConfig {
                 ).sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-
     }
 
     @Bean

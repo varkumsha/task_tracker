@@ -2,27 +2,36 @@ import React, { useState } from "react";
 import axios from "axios";
 import API_BASE_URL from "../config";
 
-const Login = () => {
+const Register = () => {
+    const [name, setName] = useState("");
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post(
-                `${API_BASE_URL}/auth/v1/login`,
-                { userName, password }
-            );
+        if (password !== confirmPassword) {
+            setError("Passwords do not match!");
+            return;
+        }
 
-            localStorage.setItem("token", response.data.token);
-            setSuccess("Logged-in successful!");
+        try {
+            const response = await axios.post(`${API_BASE_URL}/auth/v1/register`, {
+                name,
+                userName,
+                password,
+            });
+
+            setSuccess("Registration successful! Please login.");
+            setError("");
             setTimeout(() => {
-                window.location.href = "/dashboard";
-            }, 2000)
+                window.location.href = "/login";
+            }, 2000);
         } catch (err) {
-            setError("Invalid credentials. Please try again.");
+            setError("Registration failed. Try again.");
+            setSuccess("");
         }
     };
 
@@ -57,8 +66,24 @@ const Login = () => {
                         color: "#0077b6",
                     }}
                 >
-                    Welcome Back 👋
+                    Create Account ✨
                 </h2>
+
+                <input
+                    type="text"
+                    placeholder="Full Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    style={{
+                        padding: "12px",
+                        borderRadius: "8px",
+                        border: "1px solid #ccc",
+                        marginBottom: "12px",
+                        outline: "none",
+                        fontSize: "15px",
+                    }}
+                />
 
                 <input
                     type="text"
@@ -92,6 +117,22 @@ const Login = () => {
                     }}
                 />
 
+                <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                    style={{
+                        padding: "12px",
+                        borderRadius: "8px",
+                        border: "1px solid #ccc",
+                        marginBottom: "12px",
+                        outline: "none",
+                        fontSize: "15px",
+                    }}
+                />
+
                 <button
                     type="submit"
                     style={{
@@ -108,7 +149,7 @@ const Login = () => {
                     onMouseOver={(e) => (e.target.style.opacity = 0.9)}
                     onMouseOut={(e) => (e.target.style.opacity = 1)}
                 >
-                    Login
+                    Register
                 </button>
 
                 {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
@@ -117,19 +158,13 @@ const Login = () => {
                 <div
                     style={{
                         display: "flex",
-                        justifyContent: "space-between",
+                        justifyContent: "center",
                         marginTop: "15px",
                         fontSize: "14px",
                     }}
                 >
-                    <a href="/register" style={{ color: "#0077b6", textDecoration: "none" }}>
-                        Register
-                    </a>
-                    <a
-                        href="/forgot-password"
-                        style={{ color: "#0077b6", textDecoration: "none" }}
-                    >
-                        Forgot Password?
+                    <a href="/login" style={{ color: "#0077b6", textDecoration: "none" }}>
+                        Already have an account? Login
                     </a>
                 </div>
             </form>
@@ -137,4 +172,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

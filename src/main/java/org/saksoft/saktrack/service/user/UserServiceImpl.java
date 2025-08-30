@@ -1,6 +1,8 @@
 package org.saksoft.saktrack.service.user;
 
 import org.saksoft.saktrack.dto.request.user.UserDetailsRequest;
+import org.saksoft.saktrack.dto.request.user.UserRegistrationRequest;
+import org.saksoft.saktrack.dto.response.GenericResponse;
 import org.saksoft.saktrack.dto.response.user.UserListDetailsResponse;
 import org.saksoft.saktrack.dto.response.user.UserResponse;
 import org.saksoft.saktrack.model.User;
@@ -63,5 +65,19 @@ public class UserServiceImpl implements UserService {
 
         return ResponseEntity.ok(userResponse);
 
+    }
+
+    @Override
+    public ResponseEntity<GenericResponse> registerNewUser(String authToken, UserRegistrationRequest userRegistrationRequest) {
+        GenericResponse response = new GenericResponse();
+        try{
+
+        }catch(Exception e){
+            LOG.error("Error while registering user:{}",e.getMessage());
+            e.printStackTrace();
+
+        }
+
+        return null;
     }
 }

@@ -1,6 +1,8 @@
 package org.saksoft.saktrack.service.user;
 
 import org.saksoft.saktrack.dto.request.user.UserDetailsRequest;
+import org.saksoft.saktrack.dto.request.user.UserRegistrationRequest;
+import org.saksoft.saktrack.dto.response.GenericResponse;
 import org.saksoft.saktrack.dto.response.user.UserListDetailsResponse;
 import org.saksoft.saktrack.dto.response.user.UserResponse;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,8 @@ public interface UserService {
 //    UserResponse fetchUserById(Long id);
 //
     ResponseEntity<UserResponse> fetchUserByUserName(String userName);
+
+    ResponseEntity<GenericResponse> registerNewUser(String authToken, UserRegistrationRequest userRegistrationRequest);
 //
 //    GenericResponse createNewUser(User user);
 //
