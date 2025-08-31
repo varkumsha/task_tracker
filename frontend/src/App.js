@@ -6,6 +6,7 @@ import Register from "./component/Register";
 import ForgotPassword from "./component/ForgotPassword";
 import ResetPassword from "./component/ResetPassword";
 import Taskform from "./component/Taskform";
+import TaskList from "./component/TaskList";
 function App() {
     return (
         <Router>
@@ -16,7 +17,8 @@ function App() {
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/tempo" element={<Taskform />} />
+                <Route path="/tempo" element={<TaskList />} />
+
             </Routes>
         </Router>
     );
