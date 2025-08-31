@@ -23,36 +23,12 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div
-            style={{
-                minHeight: "100vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                background: "linear-gradient(135deg, rgb(36,72,129) 0%, rgb(92,165,198) 100%)",
-                fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-            }}
-        >
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#244881] to-[#5ca5c6] font-sans">
             <form
                 onSubmit={handleSubmit}
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "350px",
-                    padding: "30px",
-                    borderRadius: "16px",
-                    background: "white",
-                    boxShadow: "0px 8px 20px rgba(0,0,0,0.15)",
-                    animation: "fadeIn 0.8s ease-in-out",
-                }}
+                className="flex flex-col w-full max-w-md bg-white p-8 rounded-2xl shadow-lg animate-fadeIn"
             >
-                <h2
-                    style={{
-                        textAlign: "center",
-                        marginBottom: "20px",
-                        color: "#0077b6",
-                    }}
-                >
+                <h2 className="text-center mb-6 text-2xl font-semibold text-[#0077b6]">
                     Forgot Password 🔑
                 </h2>
 
@@ -62,47 +38,21 @@ const ForgotPassword = () => {
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
                     required
-                    style={{
-                        padding: "12px",
-                        borderRadius: "8px",
-                        border: "1px solid #ccc",
-                        marginBottom: "12px",
-                        outline: "none",
-                        fontSize: "15px",
-                    }}
+                    className="p-3 rounded-lg border border-gray-300 mb-4 outline-none text-base focus:ring-2 focus:ring-blue-400"
                 />
 
                 <button
                     type="submit"
-                    style={{
-                        background: "linear-gradient(90deg, #00c6ff 0%, #0072ff 100%)",
-                        color: "white",
-                        padding: "12px",
-                        borderRadius: "8px",
-                        border: "none",
-                        fontSize: "16px",
-                        fontWeight: "bold",
-                        cursor: "pointer",
-                        transition: "0.3s",
-                    }}
-                    onMouseOver={(e) => (e.target.style.opacity = 0.9)}
-                    onMouseOut={(e) => (e.target.style.opacity = 1)}
+                    className="bg-gradient-to-r from-[#00c6ff] to-[#0072ff] text-white p-3 rounded-lg font-bold text-lg transition hover:opacity-90"
                 >
                     Send Reset Link
                 </button>
 
-                {message && <p style={{ color: "green", textAlign: "center" }}>{message}</p>}
-                {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+                {message && <p className="text-green-600 text-center mt-3">{message}</p>}
+                {error && <p className="text-red-600 text-center mt-3">{error}</p>}
 
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: "15px",
-                        fontSize: "14px",
-                    }}
-                >
-                    <a href="/login" style={{ color: "#0077b6", textDecoration: "none" }}>
+                <div className="flex justify-center mt-4 text-sm">
+                    <a href="/login" className="text-[#0077b6] hover:underline">
                         Back to Login
                     </a>
                 </div>

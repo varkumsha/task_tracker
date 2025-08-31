@@ -17,7 +17,7 @@ public interface UserService {
 //
     ResponseEntity<UserResponse> fetchUserByUserName(String userName);
 
-    ResponseEntity<GenericResponse> registerNewUser(String authToken, UserRegistrationRequest userRegistrationRequest);
+    ResponseEntity<GenericResponse> registerNewUser( UserRegistrationRequest userRegistrationRequest);
 //
 //    GenericResponse createNewUser(User user);
 //

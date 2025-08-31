@@ -3,138 +3,86 @@ import axios from "axios";
 import API_BASE_URL from "../config";
 
 const Login = () => {
-    const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post(
-                `${API_BASE_URL}/auth/v1/login`,
-                { userName, password }
-            );
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${API_BASE_URL}/auth/v1/login`, {
+        userName,
+        password,
+      });
 
-            localStorage.setItem("token", response.data.token);
-            setSuccess("Logged-in successful!");
-            setTimeout(() => {
-                window.location.href = "/dashboard";
-            }, 2000)
-        } catch (err) {
-            setError("Invalid credentials. Please try again.");
-        }
-    };
+      localStorage.setItem("token", response.data.token);
+      setError("");
+      setSuccess("Logged-in successful!");
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 2000);
+    } catch (err) {
+      setError("Invalid credentials. Please try again.");
+      setSuccess("");
+    }
+  };
 
-    return (
-        <div
-            style={{
-                minHeight: "100vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                background: "linear-gradient(135deg, rgb(36,72,129) 0%, rgb(92,165,198) 100%)",
-                fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-            }}
+  return (
+    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-blue-900 to-sky-400 font-sans">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col w-80 sm:w-96 p-6 sm:p-8 rounded-2xl bg-white shadow-xl animate-fadeIn"
+      >
+        <h2 className="text-center mb-6 text-blue-600 text-2xl font-bold">
+          Welcome Back 👋
+        </h2>
+
+        <input
+          type="text"
+          placeholder="Email or Mobile"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+          required
+          className="p-3 rounded-lg border border-gray-300 mb-4 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className="p-3 rounded-lg border border-gray-300 mb-4 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+
+        <button
+          type="submit"
+          className="bg-gradient-to-r from-cyan-400 to-blue-600 text-white py-3 rounded-lg text-lg font-semibold transition hover:opacity-90"
         >
-            <form
-                onSubmit={handleSubmit}
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "350px",
-                    padding: "30px",
-                    borderRadius: "16px",
-                    background: "white",
-                    boxShadow: "0px 8px 20px rgba(0,0,0,0.15)",
-                    animation: "fadeIn 0.8s ease-in-out",
-                }}
-            >
-                <h2
-                    style={{
-                        textAlign: "center",
-                        marginBottom: "20px",
-                        color: "#0077b6",
-                    }}
-                >
-                    Welcome Back 👋
-                </h2>
+          Login
+        </button>
 
-                <input
-                    type="text"
-                    placeholder="Email or Mobile"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    required
-                    style={{
-                        padding: "12px",
-                        borderRadius: "8px",
-                        border: "1px solid #ccc",
-                        marginBottom: "12px",
-                        outline: "none",
-                        fontSize: "15px",
-                    }}
-                />
+        {error && <p className="text-red-500 text-center mt-3">{error}</p>}
+        {success && <p className="text-green-500 text-center mt-3">{success}</p>}
 
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    style={{
-                        padding: "12px",
-                        borderRadius: "8px",
-                        border: "1px solid #ccc",
-                        marginBottom: "12px",
-                        outline: "none",
-                        fontSize: "15px",
-                    }}
-                />
-
-                <button
-                    type="submit"
-                    style={{
-                        background: "linear-gradient(90deg, #00c6ff 0%, #0072ff 100%)",
-                        color: "white",
-                        padding: "12px",
-                        borderRadius: "8px",
-                        border: "none",
-                        fontSize: "16px",
-                        fontWeight: "bold",
-                        cursor: "pointer",
-                        transition: "0.3s",
-                    }}
-                    onMouseOver={(e) => (e.target.style.opacity = 0.9)}
-                    onMouseOut={(e) => (e.target.style.opacity = 1)}
-                >
-                    Login
-                </button>
-
-                {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-                {success && <p style={{ color: "green", textAlign: "center" }}>{success}</p>}
-
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        marginTop: "15px",
-                        fontSize: "14px",
-                    }}
-                >
-                    <a href="/register" style={{ color: "#0077b6", textDecoration: "none" }}>
-                        Register
-                    </a>
-                    <a
-                        href="/forgot-password"
-                        style={{ color: "#0077b6", textDecoration: "none" }}
-                    >
-                        Forgot Password?
-                    </a>
-                </div>
-            </form>
+        <div className="flex justify-between mt-4 text-sm">
+          <a
+            href="/register"
+            className="text-blue-600 hover:underline transition"
+          >
+            Register
+          </a>
+          <a
+            href="/forgot-password"
+            className="text-blue-600 hover:underline transition"
+          >
+            Forgot Password?
+          </a>
         </div>
-    );
+      </form>
+    </div>
+  );
 };
 
 export default Login;

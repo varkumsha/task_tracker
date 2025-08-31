@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping(value = "/user/v1/")
+@RequestMapping(value = "/user/v1")
 public class UserController {
 
     private final UserService userService;
@@ -24,9 +24,5 @@ public class UserController {
         return userService.fetchAllUsers(null);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<GenericResponse> registerNewUser(@RequestBody UserRegistrationRequest userRegistrationRequest, @RequestHeader("Authorization") String authToken) {
-        return userService.registerNewUser(authToken,userRegistrationRequest);
 
-    }
 }
