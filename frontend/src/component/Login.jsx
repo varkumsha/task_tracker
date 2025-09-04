@@ -35,7 +35,7 @@ const Login = () => {
         className="flex flex-col w-80 sm:w-96 p-6 sm:p-8 rounded-2xl bg-white shadow-xl animate-fadeIn"
       >
         <h2 className="text-center mb-6 text-blue-600 text-2xl font-bold">
-          Welcome Back 👋
+          Welcome Tracker 👋
         </h2>
 
         <input

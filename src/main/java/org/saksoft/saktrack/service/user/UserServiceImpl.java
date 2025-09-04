@@ -32,10 +32,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<UserListDetailsResponse> fetchAllUsers(UserDetailsRequest request) {
+        LOG.info("Entering into UserServiceImpl.fetchAllUsers with request:{}",request);
         List<User> users = userRepository.findAll();
-        System.out.println(users.size());
-        LOG.info("============================");
-        System.out.println(users);
+        
+     
         UserListDetailsResponse userListDetailsResponse = new UserListDetailsResponse();
 
         List<UserResponse> userResponseList = new ArrayList<>();
@@ -44,12 +44,16 @@ public class UserServiceImpl implements UserService {
             userResponse.setUserId(user.getId());
             userResponse.setUserEmail(user.getEmail());
             userResponse.setUserName(user.getUserName());
+            userResponse.setIsUserActive(user.getIsUserActive());
             userResponse.setUserPhone(user.getMobileNumber());
             userResponse.setCreatedDate(user.getCreatedAt());
+            userResponse.setUpdatedDate(user.getUpdatedAt());
 
             userResponseList.add(userResponse);
         }
         userListDetailsResponse.setUsers(userResponseList);
+        userListDetailsResponse.setMessage("Data Fetch Successfully");
+        userListDetailsResponse.setStatus(Boolean.TRUE.toString());
         return ResponseEntity.ok(userListDetailsResponse);
     }
 

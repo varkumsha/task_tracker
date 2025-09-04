@@ -7,10 +7,12 @@ import lombok.Setter;
 
 import java.util.List;
 
+import org.saksoft.saktrack.dto.response.GenericResponse;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserListDetailsResponse {
+public class UserListDetailsResponse extends GenericResponse{
     List<UserResponse> users;
 }

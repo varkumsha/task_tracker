@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.saksoft.saktrack.constants.Role;
-import org.saksoft.saktrack.dto.response.GenericResponse;
 
 import java.util.Date;
 
@@ -13,11 +12,12 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserResponse extends GenericResponse {
+public class UserResponse {
     private Long userId;
     private String userName;
     private String userEmail;
     private String userPhone;
+    private String isUserActive;
     private Role role;
 
     private Date createdDate;

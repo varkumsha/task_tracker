@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   FaUserCircle,
@@ -19,10 +19,23 @@ function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const dropdownRef = useRef(null);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div>
@@ -36,7 +49,7 @@ function Navbar() {
         <ul className="flex flex-col gap-5">
           <li>
             <Link to="/dashboard" className="flex items-center gap-3 hover:text-yellow-400 transition">
-              <FaHome /> Home
+              <FaChartBar /> Dashboard
             </Link>
           </li>
           <li>
@@ -56,12 +69,13 @@ function Navbar() {
           </li>
         </ul>
 
-        <div
-          className="relative mt-auto pb-3"
-          onMouseEnter={() => setShowDropdown(true)}
-          onMouseLeave={() => setShowDropdown(false)}
-        >
-          <FaUserCircle size={40} className="cursor-pointer text-white" />
+        {/* User Icon with dropdown on click */}
+        <div className="relative mt-auto pb-3" ref={dropdownRef}>
+          <FaUserCircle
+            size={40}
+            className="cursor-pointer text-white"
+            onClick={() => setShowDropdown((prev) => !prev)}
+          />
 
           {showDropdown && (
             <div className="absolute bottom-14 left-0 bg-white text-black rounded-lg shadow-lg py-2 w-40 z-50">

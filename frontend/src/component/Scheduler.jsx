@@ -11,7 +11,7 @@ export default function Scheduler() {
     mailContent: "",
     filter: "",
     scheduleDateTime: "",
-    teamName:"NO",
+    teamName: "NO",
     isSendImmediately: false,
   });
 
@@ -35,7 +35,7 @@ export default function Scheduler() {
         return;
       }
 
-        console.log(JSON.stringify(form));
+      console.log(JSON.stringify(form));
       const response = await fetch(`${API_BASE_URL}/email/v1/template/sent`, {
         method: "POST",
         headers: {
