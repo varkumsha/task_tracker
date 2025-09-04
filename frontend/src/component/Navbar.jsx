@@ -10,6 +10,7 @@ import {
   FaSun,
   FaBars,
   FaTimes,
+  FaEnvelope
 } from "react-icons/fa";
 
 function Navbar() {
@@ -44,8 +45,8 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link to="/reports" className="flex items-center gap-3 hover:text-yellow-400 transition">
-              <FaChartBar /> Reports
+            <Link to="/scheduler" className="flex items-center gap-3 hover:text-yellow-400 transition">
+              <FaEnvelope /> Scheduler
             </Link>
           </li>
           <li>

@@ -7,6 +7,7 @@ import ForgotPassword from "./component/ForgotPassword";
 import ResetPassword from "./component/ResetPassword";
 import Taskform from "./component/Taskform";
 import TaskList from "./component/TaskList";
+import Scheduler from "./component/Scheduler";
 function App() {
     return (
         <Router>
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/tempo" element={<TaskList />} />
+                <Route path="/scheduler" element={<Scheduler />} />
 
             </Routes>
         </Router>

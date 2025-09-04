@@ -33,11 +33,13 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <Navbar />
-      <div className="flex justify-center mt-12 px-4">
+        <div className="md:ml-56 p-4">
+          <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-semibold text-gray-800">User Dashboard</h2>
+          </div>
+
         <div className="w-full max-w-4xl bg-white p-6 sm:p-10 rounded-xl shadow-lg">
-          <h2 className="text-2xl font-semibold text-center mb-6 text-gray-800">
-            User Dashboard
-          </h2>
+
 
           {error && (
             <p className="text-red-600 text-center mb-4 font-medium">{error}</p>
