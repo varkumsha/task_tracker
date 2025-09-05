@@ -5,6 +5,7 @@ import API_BASE_URL from "../config";
 import * as XLSX from "xlsx";
 import { useReactToPrint } from "react-to-print";
 import TaskForm from "./Taskform";
+import { FaFileExcel, FaPlus, FaPrint } from "react-icons/fa";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -152,8 +153,8 @@ const TaskList = () => {
           {statusMessage && (
             <div
               className={`mb-4 p-3 rounded font-semibold ${statusMessage.includes("✅")
-                  ? "bg-green-100 text-green-700"
-                  : "bg-red-100 text-red-700"
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
                 }`}
             >
               {statusMessage}
@@ -185,19 +186,19 @@ const TaskList = () => {
               onClick={handleExportExcel}
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
             >
-              Export Excel
+              <FaFileExcel></FaFileExcel>
             </button>
             <button
               onClick={handlePrint}
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
             >
-              Print
+              <FaPrint></FaPrint>
             </button>
             <button
               onClick={() => setShowModal(true)}
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-indigo-600 transition"
             >
-              Submit Task
+              <FaPlus></FaPlus>
             </button>
           </div>
 
@@ -251,8 +252,8 @@ const TaskList = () => {
               key={i}
               onClick={() => setCurrentPage(i + 1)}
               className={`px-3 py-1 rounded border ${currentPage === i + 1
-                  ? "bg-blue-500 text-white"
-                  : "bg-white"
+                ? "bg-blue-500 text-white"
+                : "bg-white"
                 }`}
             >
               {i + 1}

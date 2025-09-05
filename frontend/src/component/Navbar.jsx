@@ -62,11 +62,11 @@ function Navbar() {
               <FaEnvelope /> Scheduler
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/settings" className="flex items-center gap-3 hover:text-yellow-400 transition">
               <FaCog /> Settings
             </Link>
-          </li>
+          </li> */}
         </ul>
 
         {/* User Icon with dropdown on click */}
@@ -86,13 +86,13 @@ function Navbar() {
               >
                 Logout
               </p>
-              <p
+              {/* <p
                 className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
                 onClick={() => setDarkMode(!darkMode)}
               >
                 {darkMode ? <FaSun /> : <FaMoon />}
                 {darkMode ? "Light Mode" : "Dark Mode"}
-              </p>
+              </p> */}
             </div>
           )}
         </div>
